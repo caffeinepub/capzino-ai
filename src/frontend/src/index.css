@@ -1,0 +1,306 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;700;900&family=Anton&family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&family=Bebas+Neue&family=Archivo+Black&family=League+Spartan:wght@400;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 0.095 0 0;
+    --foreground: 1 0 0;
+    --card: 0.12 0 0;
+    --card-foreground: 1 0 0;
+    --popover: 0.13 0 0;
+    --popover-foreground: 1 0 0;
+    --primary: 0.87 0.185 88;
+    --primary-foreground: 0.09 0 0;
+    --secondary: 0.17 0 0;
+    --secondary-foreground: 1 0 0;
+    --muted: 0.17 0 0;
+    --muted-foreground: 0.54 0 0;
+    --accent: 0.87 0.185 88;
+    --accent-foreground: 0.09 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 12%;
+    --ring: 0.87 0.185 88;
+    --chart-1: 0.87 0.185 88;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+    --sidebar: 0.12 0 0;
+    --sidebar-foreground: 1 0 0;
+    --sidebar-primary: 0.87 0.185 88;
+    --sidebar-primary-foreground: 0.09 0 0;
+    --sidebar-accent: 0.17 0 0;
+    --sidebar-accent-foreground: 1 0 0;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.87 0.185 88;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(
+      ellipse at top,
+      #151515 0%,
+      #0b0b0b 60%,
+      #080808 100%
+    );
+    min-height: 100vh;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@layer utilities {
+  .text-yellow {
+    color: #f5cf2e;
+  }
+  .bg-yellow {
+    background-color: #f5cf2e;
+  }
+  .border-yellow {
+    border-color: #f5cf2e;
+  }
+  .glow-yellow {
+    box-shadow: 0 0 20px rgba(245, 207, 46, 0.4), 0 0 40px
+      rgba(245, 207, 46, 0.2);
+  }
+  .glow-yellow-sm {
+    box-shadow: 0 0 10px rgba(245, 207, 46, 0.3);
+  }
+  .text-glow-yellow {
+    text-shadow: 0 0 20px rgba(245, 207, 46, 0.8), 0 0 40px
+      rgba(245, 207, 46, 0.4);
+  }
+  .card-premium {
+    background: linear-gradient(135deg, #1c1c1c 0%, #151515 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  }
+  .card-yellow-border {
+    background: linear-gradient(135deg, #1c1c1c 0%, #151515 100%);
+    border: 1px solid #f5cf2e;
+    box-shadow: 0 0 20px rgba(245, 207, 46, 0.3), 0 12px 40px
+      rgba(0, 0, 0, 0.55);
+  }
+
+  /* Animated border */
+  .animated-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .animated-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--border-angle),
+      #f5cf2e 0%,
+      transparent 25%,
+      transparent 75%,
+      #f5cf2e 100%
+    );
+    animation: borderSpin 3s linear infinite;
+    z-index: -1;
+  }
+  .animated-border::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--border-angle),
+      rgba(245, 207, 46, 0.2) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(245, 207, 46, 0.2) 100%
+    );
+    animation: borderSpin 3s linear infinite;
+    z-index: -2;
+    filter: blur(6px);
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+  .reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
+  .reveal-delay-5 {
+    transition-delay: 0.5s;
+  }
+}
+
+@keyframes borderSpin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(245, 207, 46, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(245, 207, 46, 0.7), 0 0 50px
+      rgba(245, 207, 46, 0.3);
+  }
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-spin-ring {
+  animation: spin 1.5s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f5cf2e;
+}
